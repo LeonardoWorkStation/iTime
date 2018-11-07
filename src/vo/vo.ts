@@ -1,5 +1,4 @@
 export class Requisicao {
-    //Verificar se é lista AlunosCursos
     public tipoHora: TipoHora;
     public id: number;
     public nome: string;
@@ -8,6 +7,7 @@ export class Requisicao {
     public dataInicial: Date;
     public dataFinal: Date;
     public horasRequeridas: number;
+    public alunoCurso: AlunosCursos;
 }
 
 export class AlunosCursos {
