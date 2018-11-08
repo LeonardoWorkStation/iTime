@@ -8,11 +8,11 @@
         <div class="navbar-nav">
 
             <!-- SE FOR CORDENADOR -->
-            <a class="nav-item nav-link" [routerLink]="['/']" routerLinkActive="active">Verificar Solicitações<span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link" href="#">Gerar Relatorio</a>
-            <a class="nav-item nav-link" href="#">Cadastrar Horas</a>
-            <a class="nav-item nav-link" href="#">Cadastrar Aluno</a>
-            <a class="nav-item nav-link" href="#">Consultar Horas</a>
+            <a class="nav-item nav-link" [routerLink]="['/solicitacoes']" routerLinkActive="active">Verificar Solicitações<span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link" [routerLink]="['/relatorio']" routerLinkActive="active">Gerar Relatorio</a>
+            <a class="nav-item nav-link" [routerLink]="['/horas']" routerLinkActive="active">Cadastrar Horas</a>
+            <a class="nav-item nav-link" [routerLink]="['/cadastrar']" routerLinkActive="active">Cadastrar Aluno</a>
+            <a class="nav-item nav-link" [routerLink]="['/consultar']" routerLinkActive="active">Consultar Horas</a>
 
             <!-- SE FOR ALUNO: -->
             <!-- <a class="nav-item nav-link active" href="#">Cadastrar Certificado<span class="sr-only">(current)</span></a>
@@ -22,4 +22,6 @@
         </div>
     </div>
 </nav>
-<div class="conteudo"></div>
+<div class="conteudo">
+    <router-outlet></router-outlet>
+</div>
