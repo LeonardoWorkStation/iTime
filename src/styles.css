@@ -1,1 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
+.formulario_borda{
+    margin: 2%;
+}
+
+.btn-primary {
+    margin-top: 1%;
+
+}
+.error-message{
+    color: red;
+}
+
+.cor-azul{
+    color: #007bff;
+}

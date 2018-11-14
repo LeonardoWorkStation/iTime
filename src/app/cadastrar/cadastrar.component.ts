@@ -8,12 +8,13 @@ import { Aluno } from "src/vo/vo";
 })
 export class CadastrarComponent implements OnInit {
 
-  public aluno: Aluno;
+  public aluno: Aluno = new Aluno;
 
   ngOnInit() {
+  }
 
-    this.aluno = new Aluno
-
+  public salvar(){
+    console.log(this.aluno.semestre);
   }
 
 }

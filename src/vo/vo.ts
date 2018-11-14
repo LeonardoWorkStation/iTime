@@ -17,9 +17,11 @@ export class AlunosCursos {
 }
 
 export class Aluno {
-    public id: number;
     public nome: string;
+    public sobrenome: string;
     public semestre: number;
+    public ra: number;
+
 }
 
 export class Cordenador {

@@ -1,46 +1,48 @@
 <div class="formulario_borda">
-  <form>
+  <form #cadastroForm="ngForm">
     <div class="form-row">
       <div class="col-md-4 mb-3">
-        <label for="validationDefault01">Nome</label>
-        <input type="text" class="form-control" id="validationDefault01" placeholder="Primeiro Nome" required>
+        <label>Nome</label>
+        <input type="text" class="form-control" placeholder="Primeiro Nome" required name="nome"
+          #nome="ngModel" [(ngModel)]="aluno.nome">
       </div>
       <div class="col-md-4 mb-3">
-        <label for="validationDefault02">Sobrenome</label>
-        <input type="text" class="form-control" id="validationDefault02" placeholder="Sobrenome" required>
+        <label>Sobrenome</label>
+        <input type="text" class="form-control" placeholder="Sobrenome" required name="sobrenome"
+          #sobrenome="ngModel" [(ngModel)]="aluno.sobrenome">
       </div>
     </div>
     <div class="form-row">
       <div class="col-md-4 mb-3">
-        <label for="validationDefaultUsername">Registro Geral</label>
+        <label>Registro do Aluno</label>
         <div class="input-group">
           <div class="input-group-prepend">
             <span class="input-group-text" id="inputGroupPrepend2">RA</span>
           </div>
-          <input type="text" class="form-control" id="validationDefaultUsername" placeholder="****" aria-describedby="inputGroupPrepend2"
-            required>
+          <input type="text" class="form-control" placeholder="****" aria-describedby="inputGroupPrepend2"
+            required name="ra" #ra="ngModel" [(ngModel)]="aluno.ra">
         </div>
       </div>
       <div class="col-md-4 mb-3">
-          <label for="validationDefaultUsername">Escolha o Semestre</label>
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="inputGroupPrepend2">Escolha</span>
-            </div>
-            <select class="custom-select">
-                <option selected>1º Semestre</option>
-                <option value="1">2º Semestre</option>
-                <option value="2">3º Semestre</option>
-                <option value="3">4º Semestre</option>
-                <option value="1">5º Semestre</option>
-                <option value="2">6º Semestre</option>
-                <option value="3">7º Semestre</option>
-                <option value="3">8º Semestre</option>
-              </select>
+        <label>Escolha o Semestre</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Escolha</span>
           </div>
+          <select class="custom-select">
+            <option selected>1º Semestre</option>
+            <option value="1">2º Semestre</option>
+            <option value="2">3º Semestre</option>
+            <option value="3">4º Semestre</option>
+            <option value="1">5º Semestre</option>
+            <option value="2">6º Semestre</option>
+            <option value="3">7º Semestre</option>
+            <option value="3">8º Semestre</option>
+          </select>
         </div>
-      
+      </div>
+
     </div>
-    <button class="btn btn-primary" type="submit">Cadastrar Aluno</button>
+    <button class="btn btn-primary" type="submit" (click)="salvar()">Cadastrar Aluno</button>
   </form>
 </div>

@@ -12,6 +12,7 @@ import { SolicitacoesComponent } from './solicitacoes/solicitacoes.component';
 import { CadastrarComponent } from "./cadastrar/cadastrar.component";
 import { HorasComponent } from './horas/horas.component';
 import { ConsultarComponent } from './consultar/consultar.component';
+import { OpenSolicitacaoComponent } from './open-solicitacao/open-solicitacao.component';
 
 const rotas : Routes = [
   {path: 'relatorio', component : RelatorioComponent},
@@ -19,6 +20,7 @@ const rotas : Routes = [
   {path: 'consultar', component : ConsultarComponent},
   {path: 'cadastrar', component : CadastrarComponent},
   {path: 'horas', component : HorasComponent},
+  {path: 'open-solicitacao', component : OpenSolicitacaoComponent},
   {path: '', pathMatch: 'full', redirectTo: '/solicitacoes'}
 
 ];
@@ -30,7 +32,8 @@ const rotas : Routes = [
     HorasComponent,
     ConsultarComponent,
     RelatorioComponent,
-    SolicitacoesComponent
+    SolicitacoesComponent,
+    OpenSolicitacaoComponent
   ],
   imports: [
     BrowserModule,
@@ -39,6 +42,7 @@ const rotas : Routes = [
     HttpClientModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
+
 export class AppModule { }
