@@ -14,6 +14,7 @@ import { HorasComponent } from './horas/horas.component';
 import { ConsultarComponent } from './consultar/consultar.component';
 import { OpenSolicitacaoComponent } from './open-solicitacao/open-solicitacao.component';
 import { StatusAlunoComponent } from './status-aluno/status-aluno.component';
+import { LoginComponent } from './login/login.component';
 
 const rotas : Routes = [
   {path: 'relatorio', component : RelatorioComponent},
@@ -23,6 +24,7 @@ const rotas : Routes = [
   {path: 'horas', component : HorasComponent},
   {path: 'open-solicitacao', component : OpenSolicitacaoComponent},
   {path: 'status-aluno', component : StatusAlunoComponent },
+  {path: 'login', component : LoginComponent},
   {path: '', pathMatch: 'full', redirectTo: '/solicitacoes'}
 
 ];
@@ -36,7 +38,8 @@ const rotas : Routes = [
     RelatorioComponent,
     SolicitacoesComponent,
     OpenSolicitacaoComponent,
-    StatusAlunoComponent
+    StatusAlunoComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
