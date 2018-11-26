@@ -1,0 +1,182 @@
+CREATE SEQUENCE papeis_id_papel_seq;
+
+CREATE TABLE papeis (
+                id_papel INTEGER NOT NULL DEFAULT nextval('papeis_id_papel_seq'),
+                nome_papel VARCHAR NOT NULL,
+                CONSTRAINT id_papeis PRIMARY KEY (id_papel)
+);
+
+
+ALTER SEQUENCE papeis_id_papel_seq OWNED BY papeis.id_papel;
+
+CREATE SEQUENCE usuario_id_usuario_seq;
+
+CREATE TABLE usuario (
+                id_usuario INTEGER NOT NULL DEFAULT nextval('usuario_id_usuario_seq'),
+                nome VARCHAR NOT NULL,
+                login VARCHAR NOT NULL,
+                senha VARCHAR NOT NULL,
+                CONSTRAINT id_usuario PRIMARY KEY (id_usuario)
+);
+
+
+ALTER SEQUENCE usuario_id_usuario_seq OWNED BY usuario.id_usuario;
+
+CREATE SEQUENCE usuario_papeis_id_usuario_papeis_seq;
+
+CREATE TABLE usuario_papeis (
+                id_usuario_papeis INTEGER NOT NULL DEFAULT nextval('usuario_papeis_id_usuario_papeis_seq'),
+                id_papel INTEGER NOT NULL,
+                id_usuario INTEGER NOT NULL,
+                CONSTRAINT id_usuario_papeis PRIMARY KEY (id_usuario_papeis, id_papel, id_usuario)
+);
+
+
+ALTER SEQUENCE usuario_papeis_id_usuario_papeis_seq OWNED BY usuario_papeis.id_usuario_papeis;
+
+CREATE SEQUENCE coordenadores_id_coordenador_seq;
+
+CREATE TABLE coordenadores (
+                id_coordenador INTEGER NOT NULL DEFAULT nextval('coordenadores_id_coordenador_seq'),
+                nome_coordenador VARCHAR NOT NULL,
+                CONSTRAINT id_coordenador PRIMARY KEY (id_coordenador)
+);
+
+
+ALTER SEQUENCE coordenadores_id_coordenador_seq OWNED BY coordenadores.id_coordenador;
+
+CREATE SEQUENCE tipo_hora_id_tipo_hora_seq;
+
+CREATE TABLE tipo_hora (
+                id_tipo_hora INTEGER NOT NULL DEFAULT nextval('tipo_hora_id_tipo_hora_seq'),
+                nome_tipo-requisicao VARCHAR NOT NULL,
+                CONSTRAINT id_tipo_hora PRIMARY KEY (id_tipo_hora)
+);
+
+
+ALTER SEQUENCE tipo_hora_id_tipo_hora_seq OWNED BY tipo_hora.id_tipo_hora;
+
+CREATE SEQUENCE cursos_id_curso_seq;
+
+CREATE TABLE cursos (
+                id_curso INTEGER NOT NULL DEFAULT nextval('cursos_id_curso_seq'),
+                id_coordenador INTEGER NOT NULL,
+                nome VARCHAR NOT NULL,
+                CONSTRAINT id_curso PRIMARY KEY (id_curso)
+);
+
+
+ALTER SEQUENCE cursos_id_curso_seq OWNED BY cursos.id_curso;
+
+CREATE SEQUENCE alunos_id_aluno_seq;
+
+CREATE TABLE alunos (
+                id_aluno INTEGER NOT NULL DEFAULT nextval('alunos_id_aluno_seq'),
+                nome VARCHAR NOT NULL,
+                semestre INTEGER NOT NULL,
+                CONSTRAINT id_aluno PRIMARY KEY (id_aluno)
+);
+
+
+ALTER SEQUENCE alunos_id_aluno_seq OWNED BY alunos.id_aluno;
+
+CREATE SEQUENCE alunos_cursos_id_alunos_curso_seq;
+
+CREATE TABLE alunos_cursos (
+                id_alunos_curso INTEGER NOT NULL DEFAULT nextval('alunos_cursos_id_alunos_curso_seq'),
+                id_aluno INTEGER NOT NULL,
+                id_curso INTEGER NOT NULL,
+                CONSTRAINT id_alunos_cursos PRIMARY KEY (id_alunos_curso)
+);
+
+
+ALTER SEQUENCE alunos_cursos_id_alunos_curso_seq OWNED BY alunos_cursos.id_alunos_curso;
+
+CREATE SEQUENCE requisicoes_id_requisicao_seq;
+
+CREATE TABLE requisicoes (
+                id_requisicao INTEGER NOT NULL DEFAULT nextval('requisicoes_id_requisicao_seq'),
+                id_alunos_curso INTEGER NOT NULL,
+                id_tipo_hora INTEGER NOT NULL,
+                nome_evento VARCHAR NOT NULL,
+                entidade VARCHAR NOT NULL,
+                descricao VARCHAR NOT NULL,
+                data_inicial DATE NOT NULL,
+                data_final DATE NOT NULL,
+                horas_requeridas DOUBLE PRECISION NOT NULL,
+                documento VARCHAR NOT NULL,
+                CONSTRAINT id_requisicao PRIMARY KEY (id_requisicao)
+);
+
+
+ALTER SEQUENCE requisicoes_id_requisicao_seq OWNED BY requisicoes.id_requisicao;
+
+CREATE SEQUENCE avaliacoes_id_avaliacao_seq;
+
+CREATE TABLE avaliacoes (
+                id_avaliacao INTEGER NOT NULL DEFAULT nextval('avaliacoes_id_avaliacao_seq'),
+                id_requisicao INTEGER NOT NULL,
+                status INTEGER NOT NULL,
+                horas_validadas DOUBLE PRECISION NOT NULL,
+                data_validacao DATE NOT NULL,
+                CONSTRAINT id_avaliacoes PRIMARY KEY (id_avaliacao)
+);
+
+
+ALTER SEQUENCE avaliacoes_id_avaliacao_seq OWNED BY avaliacoes.id_avaliacao;
+
+ALTER TABLE usuario_papeis ADD CONSTRAINT papeis_usuario_papeis_fk
+FOREIGN KEY (id_papel)
+REFERENCES papeis (id_papel)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE usuario_papeis ADD CONSTRAINT usuario_usuario_papeis_fk
+FOREIGN KEY (id_usuario)
+REFERENCES usuario (id_usuario)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE cursos ADD CONSTRAINT coordenadores_cursos_fk
+FOREIGN KEY (id_coordenador)
+REFERENCES coordenadores (id_coordenador)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE requisicoes ADD CONSTRAINT tipo_requisicoes_requisicoes_fk
+FOREIGN KEY (id_tipo_hora)
+REFERENCES tipo_hora (id_tipo_hora)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE alunos_cursos ADD CONSTRAINT cursos_alunos_cursos_fk
+FOREIGN KEY (id_curso)
+REFERENCES cursos (id_curso)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE alunos_cursos ADD CONSTRAINT alunos_alunos_cursos_fk
+FOREIGN KEY (id_aluno)
+REFERENCES alunos (id_aluno)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE requisicoes ADD CONSTRAINT alunos_cursos_requisicoes_fk
+FOREIGN KEY (id_alunos_curso)
+REFERENCES alunos_cursos (id_alunos_curso)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE avaliacoes ADD CONSTRAINT requisicoes_avaliacoes_fk
+FOREIGN KEY (id_requisicao)
+REFERENCES requisicoes (id_requisicao)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;

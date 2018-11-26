@@ -1,0 +1,43 @@
+<div class="formulario_borda">
+  <form #cadastroForm="ngForm">
+    <div class="form-row">
+      <div class="col-md-4 mb-3">
+        <label>Nome</label>
+        <input type="text" class="form-control" placeholder="Nome do aluno" required name="nome"
+          #nome="ngModel" [(ngModel)]="aluno.nome">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-md-4 mb-3">
+        <label>Registro do Aluno</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroupPrepend2">RA</span>
+          </div>
+          <input type="text" class="form-control" placeholder="****" aria-describedby="inputGroupPrepend2"
+            required name="ra" #ra="ngModel" [(ngModel)]="aluno.id">
+        </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <label>Escolha o Semestre</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Escolha</span>
+          </div>
+          <select required name="semestre" class="custom-select" [(ngModel)]="aluno.semestre">
+            <option selected value="1">1º Semestre</option>
+            <option value="2">2º Semestre</option>
+            <option value="3">3º Semestre</option>
+            <option value="4">4º Semestre</option>
+            <option value="5">5º Semestre</option>
+            <option value="6">6º Semestre</option>
+            <option value="7">7º Semestre</option>
+            <option value="8">8º Semestre</option>
+          </select>
+        </div>
+      </div>
+
+    </div>
+    <button class="btn btn-primary" type="submit" (click)="salvar()">Cadastrar Aluno</button>
+  </form>
+</div>

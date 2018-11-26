@@ -1,0 +1,10 @@
+<div class="formulario_borda">
+    <div class="form-row">
+        <h5>Lista de Alunos:</h5>
+    </div>
+    <div class="form-row">
+        <div class="list-group col" *ngFor="let a of alunos">
+            <a href="#" [routerLink]="['/status-aluno']" class="list-group-item list-group-item-action">{{a.nome}}</a>
+        </div>
+    </div>
+</div>
