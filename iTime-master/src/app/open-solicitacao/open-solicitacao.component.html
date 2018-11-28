@@ -1,36 +1,40 @@
 <form>
-  <div class="formulario_borda">
+  <div class="formulario_borda" *ngFor="let r of requisicao">
     <div class="form-row">
       <div class="col-md-4 mb-3">
-        <label class="cor-azul">Nome do Evento: </label><br>
+        <label class="cor-azul">Nome do Evento: {{r.nomeEvento}} </label><br>
         <label>Hackaton</label>
       </div>
       <div class="col-md3 mb-3">
-        <label class="cor-azul">Data: </label><br>
+        <label class="cor-azul">Data inicial: {{r.dataInicial}}</label><br>
+        <label>21/07/2018</label>
+      </div>
+      <div class="col-md3 mb-3">
+        <label class="cor-azul">Data final: {{r.dataFinal}}</label><br>
         <label>21/07/2018</label>
       </div>
     </div>
     <div class="form-row">
       <div class="col-md-7 mb-3">
-        <label class="cor-azul">Descrição do evento: </label><br>
-        <label>Varias Coisas</label>
+        <label class="cor-azul">Descrição do evento</label><br>
+        <label>{{r.descricao}}</label>
       </div>
     </div>
     <div class="form-row">
       <div class="col-md-7 mb-4">
-        <label class="cor-azul">Observação: </label><br>
-        <label>Bastante descrição</label>
+        <label class="cor-azul">Entidade promotora </label><br>
+        <label>{{r.entidade}}</label>
       </div>
     </div>
     <div class="form-row">
       <div class="col-md-7 mb-4">
         <label class="cor-azul">Quantidade de horas: </label><br>
-        <label>35 horas</label>
+        <label>{{r.horasRequeridas}}}</label>
       </div>
     </div>
     <div class="btn-group" role="group" aria-label="Basic example">
-      <button type="button" class="btn btn-secondary btn-success">Aprovar</button>
-      <button type="button" class="btn btn-secondary btn-danger">Reprovar</button>
+      <button type="button" class="btn btn-secondary btn-success" (click)="aprovar">Aprovar</button>
+      <button type="button" class="btn btn-secondary btn-danger" (click)="reprovar">Reprovar</button>
     </div>
   </div>
 </form>

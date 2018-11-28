@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 
 import { RouterModule, Routes } from "@angular/router";
 import { HttpClientModule } from "@angular/common/http";
-
 import { FormsModule } from "@angular/forms";
 
 import { AppComponent } from './app.component';
@@ -22,10 +21,10 @@ const rotas : Routes = [
   {path: 'consultar', component : ConsultarComponent},
   {path: 'cadastrar', component : CadastrarComponent},
   {path: 'horas', component : HorasComponent},
-  {path: 'open-solicitacao', component : OpenSolicitacaoComponent},
+  {path: 'open-solicitacao/:id', component : OpenSolicitacaoComponent},
   {path: 'status-aluno', component : StatusAlunoComponent },
   {path: 'login', component : LoginComponent},
-  {path: '', pathMatch: 'full', redirectTo: '/solicitacoes'}
+  {path: '', pathMatch: 'full', redirectTo: '/login'}
 
 ];
 
@@ -39,13 +38,13 @@ const rotas : Routes = [
     SolicitacoesComponent,
     OpenSolicitacaoComponent,
     StatusAlunoComponent,
-    LoginComponent
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     RouterModule.forRoot(rotas),
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -24,22 +24,21 @@
     <div class="form-row">
       <div class="col-md-7 mb-2">
         <label>Entidade promotora</label>
-        <textarea class="col-md mb-3 form-control" placeholder="Entidade promotora" rows="1" required name="entidade"
-        [(ngModel)]="requisicao.entidade"></textarea>
+        <textarea class="col-md mb-3 form-control" placeholder="Entidade" rows="1" required name="entidade" [(ngModel)]="requisicao.entidade"></textarea>
       </div>
     </div>
     <div class="form-row">
       <div class="col-md-3 mb-3">
         <label>Número de horas a validar</label>
-        <input type="number" class="form-control" placeholder="Nº de horas a validar" [(ngModel)]="requisicao.horasRequeridas">
+        <input type="number" class="form-control" required name="horas" placeholder="Nº de horas a validar" [(ngModel)]="requisicao.horasRequeridas">
       </div>
     </div>
     <div class="form-row">
       <div class="col-md-7 mb-3">
           <small class="text-muted">Faça aqui o upload do certificado do evento:</small>
-        <input type="file" class="form-control-file" id="exampleFormControlFile1">
+        <input type="file" class="form-control-file" id="exampleFormControlFile1" name=#arquivo #arquivo>
       </div>
     </div>
-    <button class="btn btn-primary" type="submit" (click)="salvarFormulario()">Enviar Solicitação</button>
+    <button class="btn btn-primary" type="submit" (click)="salvar()">Enviar Solicitação</button>
   </div>
 </form>

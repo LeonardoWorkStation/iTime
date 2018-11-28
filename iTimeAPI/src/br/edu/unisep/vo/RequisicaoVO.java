@@ -12,6 +12,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import br.edu.unisep.serializer.LocalDateDeserializer;
+import br.edu.unisep.serializer.LocalDateSerializer;
+
 @Entity
 @Table(name="requisicoes")
 public class RequisicaoVO {
@@ -23,7 +29,7 @@ public class RequisicaoVO {
 	
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="id_alunos_curso")
-	private AlunosCursosVO id_alunos_curso;
+	private AlunosCursosVO id_aluno_curso;
 	
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="id_tipo_hora")
@@ -38,9 +44,13 @@ public class RequisicaoVO {
 	@Column(name="descricao")
 	private String descricao;
 	
+	@JsonSerialize(using=LocalDateSerializer.class)
+	@JsonDeserialize(using=LocalDateDeserializer.class)
 	@Column(name="data_inicial")
 	private LocalDate dataInicial;
 	
+	@JsonSerialize(using=LocalDateSerializer.class)
+	@JsonDeserialize(using=LocalDateDeserializer.class)
 	@Column(name="data_final")
 	private LocalDate dataFinal;
 	
@@ -58,12 +68,12 @@ public class RequisicaoVO {
 		this.id = id;
 	}
 
-	public AlunosCursosVO getId_alunos_curso() {
-		return id_alunos_curso;
+	public AlunosCursosVO getId_aluno_curso() {
+		return id_aluno_curso;
 	}
 
-	public void setId_alunos_curso(AlunosCursosVO id_alunos_curso) {
-		this.id_alunos_curso = id_alunos_curso;
+	public void setId_aluno_curso(AlunosCursosVO id_aluno_curso) {
+		this.id_aluno_curso = id_aluno_curso;
 	}
 
 	public TipoHoraVO getId_tipo_hora() {

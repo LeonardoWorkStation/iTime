@@ -1,21 +1,21 @@
 export class AlunoCursoVO {
-    private id: number;
-    private aluno: AlunoVO;
-    private curso: CursoVO;
+    public id: number;
+    public aluno: AlunoVO;
+    public curso: CursoVO;
 }
 
 export class AlunoVO {
-    private id: number;
-    private nome: string;
-    private semestre: number;
+    public id: number;
+    public nome: string;
+    public semestre: number;
 }
 
 export class AvaliacaoVO{
-    private id : number;
-    private id_requisicao : RequisicaoVO;
-    private status : number;
-    private horasValidadas : number;
-    private dataValicadao : Date;
+    public id : number;
+    public id_requisicao : RequisicaoVO;
+    public status : number;
+    public horasValidadas : number;
+    public dataValicadao : Date;
 
 }
 
@@ -25,9 +25,9 @@ export class CordenadorVO {
 }
 
 export class CursoVO {
-    private cordenador: CordenadorVO;
-    private id: number;
-    private nome: string;
+    public cordenador: CordenadorVO;
+    public id: number;
+    public nome: string;
 }
 
 export class PapelUsuarioVO {
@@ -40,21 +40,21 @@ export class PapelVO{
 }
 
 export class RequisicaoVO {
-    private id: number;
-    private id_aluno_curso : AlunoCursoVO;
-    private id_tipo_hora : TipoHoraVO;
+    public id: number;
+    public id_aluno_curso : AlunoCursoVO;
+    public id_tipo_hora : TipoHoraVO;
     private nomeEvento: string;
     private entidade: string;
     private descricao: string;
     private dataInicial: Date;
     private dataFinal: Date;
-    private horasRequeridas: number;
+    public horasRequeridas: number;
     public documento : string;
 }
 
 export class TipoHoraVO {
-    private id: number;
-    private nome: string;
+    public id: number;
+    public nome: string;
 }
 
 export class UsuarioVO {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RequisicaoVO } from 'src/vo/vo';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-solicitacoes',
@@ -13,7 +14,7 @@ export class SolicitacoesComponent implements OnInit {
 
   public requisicoes : RequisicaoVO[] = [];
 
-  constructor(private http : HttpClient) {}
+  constructor(private http : HttpClient, private router : Router) {}
 
   ngOnInit() {
     this.listar();
@@ -28,5 +29,11 @@ export class SolicitacoesComponent implements OnInit {
         alert("Não foi possível carregar da lista de solicitações" + erro.message);
       }
     )
+  }
+
+  abrirSolicitacao(id) {
+    this.router.navigate(['/open-solicitacao', {
+      id : id
+    }])
   }
 }

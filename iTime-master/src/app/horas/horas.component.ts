@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { RequisicaoVO } from 'src/vo/vo';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { RequisicaoVO, AlunoCursoVO, CursoVO, TipoHoraVO, AlunoVO } from 'src/vo/vo';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
@@ -10,8 +10,15 @@ import { Router } from '@angular/router';
 })
 export class HorasComponent implements OnInit {
   private URL_PATH = "http://localhost:8080/iTimeAPI/ws";
+  
   public requisicao : RequisicaoVO = new RequisicaoVO();
-  public documento : File = null;
+  public alunoCurso : AlunoCursoVO = new AlunoCursoVO;
+  public tipoHora : TipoHoraVO = new TipoHoraVO;
+  public aluno : AlunoVO = new AlunoVO;
+  public curso : CursoVO = new CursoVO;
+  
+  @ViewChild('arquivo') arquivo;
+
 
   constructor(
     private http : HttpClient, 
@@ -21,38 +28,23 @@ export class HorasComponent implements OnInit {
   ngOnInit() {
   }
 
-  public arquivoAdicionado(event){
-    console.log(event);
-    this.documento = <File>event.target.files[0]
-  }
+  salvar() {
+    let formData = new FormData();
+    
+    this.alunoCurso.id = 2;
+    this.tipoHora.id = 1;
+    this.requisicao.id_aluno_curso = this.alunoCurso;
+    this.requisicao.id_tipo_hora = this.tipoHora;
 
-  public salvarTudo(){
-    this.salvarDocumento();   
-    this.salvarRequisicao();
-  }
-
-  public salvarDocumento(){
-    const formData = new FormData();
-    formData.append('documento', this.documento, this.documento.name);
-    this.http.post(this.URL_PATH + "/requisicoes/salvarDocumento", this.documento).subscribe(
-        (retorno) => {
-          
-        },
+    formData.append('dados', JSON.stringify(this.requisicao));
+    formData.append('arquivo', this.arquivo.nativeElement.files[0]);
+    this.http.post(this.URL_PATH + '/requisicoes/salvarRequisicao', formData).subscribe( 
+        () => {
+            alert("Requisição salva com sucesso!!");
+        }, 
         (erro) => {
-          alert("Erro ao salvar o documento PDF!!" + erro.message);
+            alert("Erro ao salvar a requisição" + erro.message);
         }
-      )
-    }
-
-    public salvarRequisicao(){
-      this.http.post(this.URL_PATH + "/requisicoes/salvarRequisicao", this.requisicao).subscribe(
-          (retorno) => {
-            alert("Requisição de horas cadastrada com sucesso!!");
-            this.router.navigateByUrl('/solicitacoes');
-          },
-          (erro) => {
-            alert("Erro ao salvar a requisição!!" + erro.message);
-          }
-        )
-      }
+    )
+}
 }
