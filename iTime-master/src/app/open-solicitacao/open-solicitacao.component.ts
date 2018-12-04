@@ -11,17 +11,18 @@ import { HttpClient } from '@angular/common/http';
 export class OpenSolicitacaoComponent implements OnInit {
   
   public requisicao : RequisicaoVO = new RequisicaoVO;
-  public reqTemp : RequisicaoVO = new RequisicaoVO;
   public avaliacao : AvaliacaoVO = new AvaliacaoVO;
-  public data : Date = new Date();
+  public data = new Date();
 
   API_PATH = "http://localhost:8080/iTimeAPI/ws/"
 
   private id;
 
-  constructor(private http : HttpClient, private route : ActivatedRoute, private router : Router) { 
-    this.id = route.paramMap['id'];
-  }
+  constructor(private router : Router, private activeRoute : ActivatedRoute, private http : HttpClient) {
+    activeRoute.params.subscribe( p => {
+    this.id = p.id;
+}) 
+}
 
   ngOnInit() {
     this.listar();
@@ -29,7 +30,7 @@ export class OpenSolicitacaoComponent implements OnInit {
 
   listar(){
     
-    this.http.get<RequisicaoVO>(this.API_PATH + 'requisicoes/pesquisarPorId(id)').subscribe (
+    this.http.get<RequisicaoVO>(this.API_PATH + 'requisicoes/pesquisarPorId/' + this.id).subscribe (
       (retorno) => {
         this.requisicao = retorno;
       },
@@ -40,26 +41,37 @@ export class OpenSolicitacaoComponent implements OnInit {
   }
 
   aprovar(){
-    this.reqTemp.id = this.requisicao.id;
-    this.avaliacao.id_requisicao = this.reqTemp;
+    this.avaliacao.id_requisicao = this.requisicao;
     this.avaliacao.status = 1;
     this.avaliacao.horasValidadas = this.requisicao.horasRequeridas;
     this.avaliacao.dataValicadao = this.data;
 
-    this.http.post(this.API_PATH + '/avaliacoes/salvar', this.avaliacao).subscribe(
+    this.http.post(this.API_PATH + 'avaliacoes/salvar', this.avaliacao).subscribe(
       (retorno) =>{
         alert('Aprovação salva com sucesso!');
         this.router.navigateByUrl('/solicitacoes');
       },
       (erro) => {
-        alert('Não foi possível salvar a decisão de aprovação!' + erro.message);
+        alert('Não foi possível salvar a decisão de aprovação!' + erro.message + this.data);
       }
+    )
+    this.requisicao.status = 1; //alterar o status da requisição de atualiza sua condição no banco
+    this.http.post(this.API_PATH + 'requisicoes/alterar', this.requisicao).subscribe(
+      (retorno) => {
+        
+      },
+      (erro => {
+        alert('Erro ao atualizar tabela Requisições (aceitação)' + erro.message);
+      })
     )
   }
 
   reprovar(){
-    alert('A requisição foi rejeitada!!');
-    this.http.post(this.API_PATH + '/avaliacoes/salvar', this.avaliacao).subscribe(
+    this.avaliacao.id_requisicao = this.requisicao;
+    this.avaliacao.status = 0;
+    this.avaliacao.horasValidadas = 0;
+    this.avaliacao.dataValicadao = this.data;
+    this.http.post(this.API_PATH + 'avaliacoes/salvar', this.avaliacao).subscribe(
       (retorno) =>{
         alert('Rejeição salva com sucesso!');
         this.router.navigateByUrl('/solicitacoes');
@@ -68,6 +80,15 @@ export class OpenSolicitacaoComponent implements OnInit {
         alert('Não foi possível salvar a decisão de rejeição!' + erro.message);
       }
     )
+  
+    this.requisicao.status = 0; //alterar o status da requisição de atualiza sua condição no banco
+    this.http.post(this.API_PATH + 'requisicoes/alterar', this.requisicao).subscribe(
+      (retorno) => {
+        
+      },
+      (erro) => {
+        alert('Erro ao atualizar tabela Requisições (rejeição)' + erro.message);
+      })
   }
 
 }

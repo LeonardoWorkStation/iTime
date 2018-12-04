@@ -14,17 +14,23 @@ import { ConsultarComponent } from './consultar/consultar.component';
 import { OpenSolicitacaoComponent } from './open-solicitacao/open-solicitacao.component';
 import { StatusAlunoComponent } from './status-aluno/status-aluno.component';
 import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './home/home.component';
 
-const rotas : Routes = [
-  {path: 'relatorio', component : RelatorioComponent},
-  {path: 'solicitacoes', component : SolicitacoesComponent},
-  {path: 'consultar', component : ConsultarComponent},
-  {path: 'cadastrar', component : CadastrarComponent},
-  {path: 'horas', component : HorasComponent},
-  {path: 'open-solicitacao/:id', component : OpenSolicitacaoComponent},
-  {path: 'status-aluno', component : StatusAlunoComponent },
-  {path: 'login', component : LoginComponent},
-  {path: '', pathMatch: 'full', redirectTo: '/login'}
+const rotas: Routes = [
+  {
+    path: 'home', component: HomeComponent, children: [
+      { path: 'relatorio', component: RelatorioComponent },
+      { path: 'solicitacoes', component: SolicitacoesComponent },
+      { path: 'consultar', component: ConsultarComponent },
+      { path: 'cadastrar', component: CadastrarComponent },
+      { path: 'horas', component: HorasComponent },
+      { path: 'open-solicitacao/:id', component: OpenSolicitacaoComponent },
+      { path: 'status-aluno', component: StatusAlunoComponent },
+      { path: '', pathMatch : 'full', redirectTo: 'solicitacoes'}
+    ]
+  },
+  { path: 'login', component: LoginComponent },
+  { path: '', pathMatch: 'full', redirectTo: '/login' }
 
 ];
 
@@ -39,6 +45,7 @@ const rotas : Routes = [
     OpenSolicitacaoComponent,
     StatusAlunoComponent,
     LoginComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

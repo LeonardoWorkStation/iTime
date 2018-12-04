@@ -11,9 +11,9 @@
     </div>
 
     <form>
-      <input type="text" id="login" class="fadeIn second" name="login" placeholder="ra / cordenador">
-      <input type="text" id="password" class="fadeIn third" name="login" placeholder="senha">
-      <input type="submit" class="fadeIn fourth" value="Entrar">
+      <input type="text" id="login" class="fadeIn second" name="usuario" [(ngModel)]="usuario.nome" placeholder="ra / cordenador">
+      <input type="password" id="password" class="fadeIn third" name="senha" [(ngModel)]="usuario.ra" placeholder="senha">
+      <input type="submit" class="fadeIn fourth" value="Entrar" (click)="entrar()">
     </form>
 
     <div id="formFooter">

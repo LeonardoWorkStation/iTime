@@ -8,6 +8,7 @@ export class AlunoVO {
     public id: number;
     public nome: string;
     public semestre: number;
+    public ra: string;
 }
 
 export class AvaliacaoVO{
@@ -50,6 +51,7 @@ export class RequisicaoVO {
     private dataFinal: Date;
     public horasRequeridas: number;
     public documento : string;
+    status : number;
 }
 
 export class TipoHoraVO {

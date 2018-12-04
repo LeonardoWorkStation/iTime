@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#"><img src="../assets/img/logo.png">iTime</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+
+          <!-- SE FOR CORDENADOR -->
+          <a class="nav-item nav-link" [routerLink]="['/home/solicitacoes']" routerLinkActive="active">Verificar Solicitações<span class="sr-only">(current)</span></a>
+          <a class="nav-item nav-link" [routerLink]="['/home/relatorio']" routerLinkActive="active">Gerar Relatorio</a>
+          <a class="nav-item nav-link" [routerLink]="['/home/horas']" routerLinkActive="active">Cadastrar Horas</a>
+          <a class="nav-item nav-link" [routerLink]="['/home/cadastrar']" routerLinkActive="active">Cadastrar Aluno</a>
+          <a class="nav-item nav-link" [routerLink]="['/home/consultar']" routerLinkActive="active">Consultar Horas</a>
+          <a class="nav-item nav-link" (click)="sair()" routerLinkActive="active">Sair</a>
+
+          <!-- SE FOR ALUNO: -->
+          <!-- <a class="nav-item nav-link active" href="#">Cadastrar Certificado<span class="sr-only">(current)</span></a>
+          <a class="nav-item nav-link" href="#">Consultar Horas</a>
+          <a class="nav-item nav-link" href="#">Verificar Status</a>
+          <a class="nav-item nav-link" href="#">Sair</a> -->
+      </div>
+  </div>
+</nav>
+<div class="conteudo">
+  <router-outlet></router-outlet>
+</div>

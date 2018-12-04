@@ -59,6 +59,9 @@ public class RequisicaoVO {
 	
 	@Column(name="documento")
 	private String documento;
+	
+	@Column(name="status")
+	private Integer status;
 
 	public Integer getId() {
 		return id;
@@ -138,6 +141,14 @@ public class RequisicaoVO {
 
 	public void setDocumento(String documento) {
 		this.documento = documento;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 	
 }

@@ -11,6 +11,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import br.edu.unisep.serializer.LocalDateDeserializer;
+import br.edu.unisep.serializer.LocalDateSerializer;
+
 @Entity
 @Table(name="avaliacoes")
 public class AvaliacaoVO {
@@ -30,6 +36,8 @@ public class AvaliacaoVO {
 	@Column(name="horas_validadas")
 	private Double horasValidadas;
 	
+	@JsonSerialize(using=LocalDateSerializer.class)
+	@JsonDeserialize(using=LocalDateDeserializer.class)
 	@Column(name="data_validacao")
 	private LocalDate dataValidacao;
 

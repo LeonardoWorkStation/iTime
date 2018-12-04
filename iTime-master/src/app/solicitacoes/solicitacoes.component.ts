@@ -31,9 +31,7 @@ export class SolicitacoesComponent implements OnInit {
     )
   }
 
-  abrirSolicitacao(id) {
-    this.router.navigate(['/open-solicitacao', {
-      id : id
-    }])
-  }
+  abrirSolicitacao(id){
+    this.router.navigate(['open-solicitacao', id])
+}
 }
